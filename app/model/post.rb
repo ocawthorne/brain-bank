@@ -3,6 +3,6 @@
 
 #! A Post belongs to a User.
 
-class Posts < ActiveRecord::Base
-   
+class Post < ActiveRecord::Base
+   belongs_to :user
 end
