@@ -2,5 +2,5 @@
 #! When a User makes a Post, an upvote is automatically assigned to the Post.
 #! A User can upvote any entry.
 
-class UserController < Sinatra::Base
+class UserController < AppController
 end

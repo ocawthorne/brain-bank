@@ -1,2 +1,2 @@
-class PostController < Sinatra::Base
+class PostController < AppController
 end

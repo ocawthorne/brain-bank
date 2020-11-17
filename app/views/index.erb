@@ -1,0 +1,13 @@
+<h2>Welcome to Brain Bank!<h2>
+
+<% if logged_in? %>
+   <p>What have you learned today?</p>
+   <form action="/" method="post">
+      <textbox>
+
+      </textbox>
+   </form>
+
+<% else %>
+   <p>Please <a href="/login">login</a> or <a href="/users/signup">sign up</a>.</p>
+<% end %>
