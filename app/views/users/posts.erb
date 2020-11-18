@@ -1,0 +1,5 @@
+<% posts = Post.all.sort_by(:date_added).reverse! %>
+<% posts.each do |post| %>
+   <h2><%= post.date_added.strftime("%d %B %y") %></h2>
+   <p><%= post.content %>
+<% end %>

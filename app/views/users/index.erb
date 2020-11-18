@@ -1,1 +1,35 @@
 <% # Shows all posts that the user has made. %>
+
+
+<% case Time.now.strftime("%k").to_i %>
+<% when 18..23 %>
+<%    greeting = "Good evening"%>
+<% when 0..6 %>
+<%    greeting = "Good evening"%>
+<% when 6..11 %>
+<%    greeting = "Good morning"%>
+<% when 12..17 %>
+<%    greeting = "Good afternoon"%>
+<% end %>
+
+<h3><%= greeting %>, <%= current_user.name %>.</h3>
+<p>What have you learned today?</p>
+
+<form action="/new" method="post">
+   <textarea type="text" name="content" rows="3", cols="50"></textarea>
+   <p>Make this post public? <input type="checkbox" id="is_public"></p>
+   <input type="submit">
+</form>
+<br><br>
+<ul>
+   <li>
+      <a href="/feed">Feed</a>
+   </li>
+   <li>
+      <a href="<%= current_user.username %>/posts">My Posts</a>
+   </li>
+</ul>
+
+<form action="/signout" method="post">
+   <button type="submit">Sign Out</button>
+</form>
