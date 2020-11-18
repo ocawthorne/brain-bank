@@ -9,6 +9,12 @@
     
     <div class="container">
       <h1>Brain Bank</h1>
+      <% if logged_in? %>
+        <p><a href="/">Home</a>     <a href="/<%= current_user.username %>">My Profile</a>     <a href="/<%= current_user.username %>/posts">My Posts</a>     <a href="/logout">Log Out</a></p>
+      <% else %>
+        <p><a href="/">Home</a>     <a href="/login">My Profile</a>     <a href="/login">My Posts</a>     <a href="/login">Log In</a></p>
+      <% end %>
+
       <%= yield %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

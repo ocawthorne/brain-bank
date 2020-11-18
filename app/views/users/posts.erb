@@ -1,5 +1,5 @@
-<% posts = Post.all.select(id: @user.id).sort_by(:date_added).reverse! %>
+<% posts = Post.all.select{ |post| post.user_id == @user.id }.sort_by{ |post| post.date_added }.reverse! %>
 <% posts.each do |post| %>
-   <h2><%= post.date_added.strftime("%d %B %y") %></h2>
+   <h3><%= post.date_added.strftime("%d %B %y") %></h3>
    <p><%= post.content %>
 <% end %>

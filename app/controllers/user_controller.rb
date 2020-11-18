@@ -5,8 +5,12 @@
 require "pry"
 
 class UserController < AppController
+   get('/') do
+
+   end
+
    get("/signup") {erb :"users/signup"}
-   get("/login") {erb :"users/login"}
+   get("/login") {erb :"sessions/login"}
 
    post "/login" do
       @user = User.all.find_by(username: params[:username])
@@ -32,18 +36,10 @@ class UserController < AppController
       end
    end
 
-   post "/logout" do
-      session.clear
-      redirect "/login"
-   end
-
-   get "/feed" do
-      erb :feed
-   end
-
-   get ":username/posts" do
-      @user = User.find_by(username: params[:username])
-      erb :"users/posts"
+   get "/logout" do
+      erb :'sessions/logout'
+      # logged_in? ? (binding.pry ; (redirect '/login')) : (redirect '/')
+      # erb :index
    end
 
 end
