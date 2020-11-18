@@ -24,7 +24,9 @@ class UserController < AppController
    
    post "/signup" do
       user = User.create(params) ; user.reputation = 0
+      binding.pry
       session[:id] = user.id
+      redirect "/#{user.username}"
    end
 
    get "/:username" do
@@ -36,10 +38,9 @@ class UserController < AppController
       end
    end
 
-   get "/logout" do
-      erb :'sessions/logout'
-      # logged_in? ? (binding.pry ; (redirect '/login')) : (redirect '/')
-      # erb :index
+   post "/logout" do
+      logged_in? ? (session.clear ; (redirect '/login')) : (redirect '/')
+      erb :'sessions/login'
    end
 
 end

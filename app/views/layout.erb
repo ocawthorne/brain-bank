@@ -10,9 +10,9 @@
     <div class="container">
       <h1>Brain Bank</h1>
       <% if logged_in? %>
-        <p><a href="/">Home</a>     <a href="/<%= current_user.username %>">My Profile</a>     <a href="/<%= current_user.username %>/posts">My Posts</a>     <a href="/logout">Log Out</a></p>
+        <p><a href="/">My Feed</a>     <a href="/<%= current_user.username %>">My Profile</a>     <a href="/<%= current_user.username %>/posts">My Posts     </a><form action="/logout" method="post"><button type="submit">Log Out</button></form></p>
       <% else %>
-        <p><a href="/">Home</a>     <a href="/login">My Profile</a>     <a href="/login">My Posts</a>     <a href="/login">Log In</a></p>
+        <p><a href="/">My Feed</a>     <a href="/login">My Profile</a>     <a href="/login">My Posts     </a><form action="/login" method="post"><button type="submit">Log In</button></form></p>
       <% end %>
 
       <%= yield %>
