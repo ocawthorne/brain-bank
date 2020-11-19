@@ -3,6 +3,7 @@ class UserController < AppController
       
    end
 
+
    get("/signup") {erb :"users/signup"}
    get("/login") {erb :"sessions/login"}
 
@@ -32,6 +33,6 @@ class UserController < AppController
       erb :'sessions/login'
    end
 
-   get('/feed') {erb :'users/feed'}
+
 
 end

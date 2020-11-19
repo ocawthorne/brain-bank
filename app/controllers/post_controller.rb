@@ -24,8 +24,10 @@ class PostController < AppController
    end
 
    get '/:username/posts/edit/:post_id' do
+      post = Post.find(params[:post_id])
+      @checked = post.is_public ? "checked" : ""
       if session[:id] == User.find_by(username: params[:username]).id
-         @content = Post.find(params[:post_id]).content
+         @content = post.content
          erb :'posts/edit'
       else
          erb :'sessions/failure'
