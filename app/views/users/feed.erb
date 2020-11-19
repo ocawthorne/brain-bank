@@ -1,11 +1,15 @@
 <% posts = Post.all.select{ |post| post.is_public == true }.sort_by{ |post| post.date_added }.reverse! %>
-<% posts.each do |post| %>
-   <% viewers_own_post = (post.user_id == session[:id]) %>
-   <% author = User.all.find(post.user_id).username %>
-   <h3><%= post.date_added.strftime("%d %B %Y") %></h3>
-   <p><%= post.content %> <b>(<a href="/<%= author %>"><%= author %></a>)</b></p>
-   <% if viewers_own_post %>
-      <h5><a href="/<%= @user.username %>/posts/edit/<%= post.id %>">(edit)</a> <a href="/<%= @user.username %>/posts/delete/<%= post.id %>">(delete)</a> <b><%= "(private)" if !post[:is_public] %></b></h5>
+<% if posts.size > 0 %>
+   <% posts.each do |post| %>
+      <% viewers_own_post = (post.user_id == session[:id]) %>
+      <% author = User.find(post.user_id) %>
+      <h3><%= post.date_added.strftime("%d %B %Y") %></h3>
+      <p><%= post.content %> <b>(<a href="/<%= author.username %>"><%= author.username %></a>)</b></p>
+      <% if viewers_own_post %>
+         <h5><a href="/<%= @user.username %>/posts/edit/<%= post.id %>">(edit)</a> <a href="/<%= @user.username %>/posts/delete/<%= post.id %>">(delete)</a></b></h5>
+      <% end %>
+      <br \>
    <% end %>
-   <br \>
+<% else %>
+   <h3>No posts yet!</h3>
 <% end %>

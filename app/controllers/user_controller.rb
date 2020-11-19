@@ -1,9 +1,3 @@
-#! A User can only edit their own posts.
-#! When a User makes a Post, an upvote is automatically assigned to the Post.
-#! A User can upvote any entry.
-
-require "pry"
-
 class UserController < AppController
    get('/') do
       
@@ -13,7 +7,7 @@ class UserController < AppController
    get("/login") {erb :"sessions/login"}
 
    post "/login" do
-      @user = User.all.find_by(username: params[:username])
+      @user = User.find_by(username: params[:username])
       if @user && @user.authenticate(params[:password])
          session[:id] = @user.id
          redirect "/#{@user.username}"
@@ -29,12 +23,8 @@ class UserController < AppController
    end
 
    get "/:username" do
+      @user = User.find_by(username: params[:username])
       current_user.username == params[:username] ? (erb :"users/home") : (erb :"users/other_user_profile")
-      # if logged_in?
-      #    current_user.username == params[:username] ? (erb :"users/home") : (erb :"users/other_user_profile")
-      # else
-      #    erb :"users/other_user_profile"
-      # end
    end
 
    post "/logout" do
