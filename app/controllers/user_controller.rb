@@ -6,7 +6,7 @@ require "pry"
 
 class UserController < AppController
    get('/') do
-
+      
    end
 
    get("/signup") {erb :"users/signup"}
@@ -24,23 +24,24 @@ class UserController < AppController
    
    post "/signup" do
       user = User.create(params) ; user.reputation = 0
-      binding.pry
       session[:id] = user.id
       redirect "/#{user.username}"
    end
 
    get "/:username" do
-      case logged_in?
-      when true
-         current_user.username == params[:username] ? (erb :"users/index") : (erb :"users/other_user_profile")
-      when false
-         erb :"users/other_user_profile"
-      end
+      current_user.username == params[:username] ? (erb :"users/home") : (erb :"users/other_user_profile")
+      # if logged_in?
+      #    current_user.username == params[:username] ? (erb :"users/home") : (erb :"users/other_user_profile")
+      # else
+      #    erb :"users/other_user_profile"
+      # end
    end
 
    post "/logout" do
       logged_in? ? (session.clear ; (redirect '/login')) : (redirect '/')
       erb :'sessions/login'
    end
+
+   get('/feed') {erb :'users/feed'}
 
 end

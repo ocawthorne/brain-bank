@@ -7,7 +7,7 @@ class AppController < Sinatra::Base
    end
 
    get '/' do
-      erb :index
+      session[:id] ? (erb :'users/home') : (erb :index)
    end
 
    helpers do

@@ -2,7 +2,8 @@ class PostController < AppController
    get(':username/posts') {erb :'users/posts'}
 
    get "/feed" do
-      erb :feed
+      @user = User.all.find(session[:id])
+      erb :'users/feed'
    end
 
    get "/:username/posts" do
@@ -19,24 +20,34 @@ class PostController < AppController
          votes: 0,
          user_id: current_user.id
       )
+      redirect "/#{User.all.find(session[:id]).username}/posts"
    end
 
    get '/:username/posts/edit/:post_id' do
-      erb :'posts/edit'
+      if session[:id] == User.all.find_by(username: params[:username]).id
+         @content = Post.all.find(params[:post_id]).content
+         erb :'posts/edit'
+      else
+         erb :'sessions/failure'
+      end
    end
 
    post '/:username/posts/edit/:post_id' do
-
+      Post.find(params[:post_id]).update(
+         content: params[:content],
+         is_public: params[:is_public]
+      )
+      redirect "/#{User.all.find(session[:id]).username}/posts"
    end
 
    get '/:username/posts/delete/:post_id' do
-      post = Post.all.find(params[:post_id])
+      post = Post.find(params[:post_id])
       user = User.all.find_by(username: params[:username])
       if post.user_id == user.id
-         post.delete
-         Post.save
+         Post.find(params[:post_id]).delete
+         redirect "/#{params[:username]}/posts"
       else
-
+         erb :'sessions/failure'
       end
    end
 

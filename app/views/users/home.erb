@@ -1,12 +1,9 @@
-<% # Shows all posts that the user has made. %>
-
-
 <% case Time.now.strftime("%k").to_i %>
 <% when 18..23 %>
 <%    greeting = "Good evening"%>
-<% when 0..6 %>
+<% when 0..4 %>
 <%    greeting = "Good evening"%>
-<% when 6..11 %>
+<% when 5..11 %>
 <%    greeting = "Good morning"%>
 <% when 12..17 %>
 <%    greeting = "Good afternoon"%>
