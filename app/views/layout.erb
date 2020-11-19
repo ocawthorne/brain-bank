@@ -3,18 +3,29 @@
   <head>
     <title>Brain Bank</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
   <body>
     
     <div class="container">
       <h1>Brain Bank</h1>
       <% if logged_in? %>
-        <p><a href="/feed">My Feed</a>     <a href="/<%= current_user.username %>">My Profile</a>     <a href="/<%= current_user.username %>/posts">My Posts</a>     <form action="/logout" method="post"><button type="submit">Log Out</button></form></p>
+        <% feed_href = "feed" %>
+        <% create_post_href = current_user.username %>
+        <% view_posts_href = "#{current_user.username}/posts" %>
+        <% form_action = "logout" %>
+        <% button_text = "Log Out" %>
       <% else %>
-        <p><a href="/feed">My Feed</a>     <a href="/login">My Profile</a>     <a href="/login">My Posts</a>     <form action="/login" method="post"><button type="submit">Log In</button></form></p>
+        <% feed_href, create_post_href, view_posts_href, form_action = "login" %>
+        <% button_text = "Log In" %>
       <% end %>
-
+      <ul>
+        <li><a href="/<%= feed_href %>">Feed</a></li>
+        <li><a href="/<%= create_post_href %>">Create Post</a></li>
+        <li><a href="/<%= view_posts_href %>">My Posts</a></li>
+        <li><form action="/<%= form_action %>" method="post"><button type="submit" class="btn btn-link"><%= button_text %></button></form></li>
+      </ul>
+      <br \><br \>
       <%= yield %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
