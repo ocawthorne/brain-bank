@@ -21,4 +21,23 @@ class PostController < AppController
       )
    end
 
+   get '/:username/posts/edit/:post_id' do
+      erb :'posts/edit'
+   end
+
+   post '/:username/posts/edit/:post_id' do
+
+   end
+
+   get '/:username/posts/delete/:post_id' do
+      post = Post.all.find(params[:post_id])
+      user = User.all.find_by(username: params[:username])
+      if post.user_id == user.id
+         post.delete
+         Post.save
+      else
+
+      end
+   end
+
 end
