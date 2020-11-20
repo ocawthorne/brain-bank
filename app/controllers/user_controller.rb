@@ -25,7 +25,6 @@ class UserController < AppController
          erb :'users/signup'
       else
          user = User.create(params)
-         user.reputation = 0
          session[:id] = user.id
          redirect "/#{user.username}"
       end
