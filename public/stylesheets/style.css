@@ -18,3 +18,15 @@ li a {
  button {
     text-align:right;
  }
+
+ p.red {
+   color: red;
+ }
+
+ p.inline {
+   display: inline-block;
+ }
+
+ h4 {
+   font-size: 12px;
+ }

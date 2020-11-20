@@ -7,7 +7,7 @@ class AppController < Sinatra::Base
    end
 
    get '/' do
-      session[:id] ? (erb :'users/home') : (erb :index)
+      session[:id] ? (redirect "/#{User.find(session[:id]).username}") : (redirect '/login')
    end
 
    helpers do

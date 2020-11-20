@@ -9,7 +9,7 @@
 <%    greeting = "Good afternoon"%>
 <% end %>
 
-<h3><%= greeting %>, <%= current_user.name %>.</h3>
+<h3><%= greeting %>, <%= current_user.name.split(" ").first.capitalize %>.</h3>
 <p>What have you learned today?</p>
 
 <form action="/new" method="post">

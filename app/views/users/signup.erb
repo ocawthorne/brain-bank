@@ -1,14 +1,15 @@
+<h3>Sign up</h3>
 <p>Please enter your details to sign up. If you already have an account, please <a href="/login">log in</a>.</p>
 
 <form action="/signup" method="post">
    <p><b>Username:</b></p>
-   <input type="text" name="username"><p> Sorry, this username has already been taken.</p>
+   <input type="text" name="username"><p class="red inline"> <%= " Sorry, this username has already been taken." if @username_error %></p>
    <br><br>
    <p><b>Real name:</b></p>
    <input type="text" name="name">
    <br><br>
-   <p><b>Email:</b></p><p> Sorry, there is already an account registered with this address.</p>
-   <input type="email" name="email">
+   <p><b>Email:</b></p>
+   <input type="email" name="email"><p class="red inline"><%= " Sorry, there is already an account registered with this address." if @email_error %></p>
    <br><br>
    <p><b>Password:</b></p>
    <input type="password" name="password">

@@ -1,4 +1,5 @@
-<h3><%= params[:username] %>'s thoughts</h3>
+<h3><%= params[:username] %>'s musings</h3>
+<p>Follow this user</p>
 
 <% posts = Post.all.select{ |post| post.user_id == @user.id }.sort_by{ |post| post.date_added }.reverse! %>
 <% if posts.size > 0 %>
@@ -8,9 +9,6 @@
       <% else %>
             <h3><%= post.date_added.strftime("%d %B %Y") %></h3>
             <p><%= post.content %></p>
-            <% if viewers_own_account %>
-               <h5><a href="/<%= @user.username %>/posts/edit/<%= post.id %>">(edit)</a> <a href="/<%= @user.username %>/posts/delete/<%= post.id %>">(delete)</a> <b><%= "(private)" if !post[:is_public] %></b></h5>
-            <% end %>
             <br \>
       <% end %>
    <% end %>
