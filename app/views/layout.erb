@@ -11,8 +11,8 @@
       <h1>Brain Bank</h1>
       <% if logged_in? %>
         <% feed_href = "feed" %>
-        <% create_post_href = current_user.username %>
-        <% view_posts_href = "#{current_user.username}/posts" %>
+        <% create_post_href = "#{current_user.username}/posts/new" %>
+        <% view_posts_href = "#{current_user.username}" %>
         <% form_action = "logout" %>
         <% button_text = "Log Out" %>
       <% else %>

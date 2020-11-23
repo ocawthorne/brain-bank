@@ -8,7 +8,7 @@ class PostController < AppController
 
    get "/:username/posts" do
       @user = User.find_by(username: params[:username])
-      erb :"users/posts"
+      erb :'users/posts'
    end
 
    post '/new' do
@@ -24,6 +24,10 @@ class PostController < AppController
          )
       end
       redirect "/#{User.find(session[:id]).username}/posts"
+   end
+
+   get '/:username/posts/new' do
+      erb :'users/home'
    end
 
    get '/:username/posts/edit/:post_id' do
