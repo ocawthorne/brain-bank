@@ -36,7 +36,7 @@ class PostController < AppController
 
    patch '/:username/posts/:post_id/edit' do
       if posts_user_id_matches_user_found_by_username && is_user?
-         Post.find(params[:post_id]).update(params["post"])
+         Post.find(params[:post_id]).update(content: params["post"]["content"], is_public: params["post"]["is_public"])
          params["post"]["content"] == "" ? (redirect "/#{current_user.username}/posts/#{params[:post_id]}/delete") : (redirect "/#{current_user.username}/posts")
       else
          erb :'sessions/failure'

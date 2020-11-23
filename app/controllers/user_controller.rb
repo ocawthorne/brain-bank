@@ -3,13 +3,8 @@ class UserController < AppController
    get("/login") {erb :'sessions/login'}
 
    post "/login" do
-      @user = User.find_by(username: params[:username])
-      if @user && @user.authenticate(params[:password])
-         session[:id] = @user.id
-         redirect "/#{@user.username}"
-      else
-         redirect "/login"
-      end
+      user = User.find_by(username: params[:username])
+      user && user.authenticate(params[:password]) ? (session[:id] = user.id ; redirect "/#{user.username}") : (redirect "/login")
    end
    
    post "/signup" do
