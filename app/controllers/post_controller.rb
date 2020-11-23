@@ -3,7 +3,7 @@ class PostController < AppController
 
    get "/feed" do
       @user = User.find(session[:id])
-      erb :'users/feed'
+      erb :'posts/feed'
    end
 
    get "/:username/posts" do

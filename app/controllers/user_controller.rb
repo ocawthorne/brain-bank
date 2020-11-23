@@ -1,10 +1,5 @@
 class UserController < AppController
-   # get('/') do
-      
-   # end
-
-
-   get("/signup") {erb :"users/signup"}
+   get("/signup") {erb :"sessions/signup"}
    get("/login") {erb :"sessions/login"}
 
    post "/login" do
@@ -22,7 +17,7 @@ class UserController < AppController
       @username_error = true if User.find_by(username: params[:username])
       @email_error = true if User.find_by(email: params[:email])
       if @username_error || @email_error
-         erb :'users/signup'
+         erb :'sessions/signup'
       else
          user = User.create(params)
          session[:id] = user.id

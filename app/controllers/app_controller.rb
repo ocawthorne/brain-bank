@@ -1,5 +1,4 @@
 class AppController < Sinatra::Base
-
    configure do
       set :views, 'app/views'
       enable :sessions
