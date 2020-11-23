@@ -1,5 +1,5 @@
 <form action="/<%= params[:username] %>/posts/edit/<%= params[:post_id]%>" method="post">
-   <textarea type="text" name="content" rows="3", cols="50"><%= @content %></textarea>
-   <p>Make this post public? <input type="checkbox" name="is_public"   <%= @checked %>></p>
+   <textarea type="text" name="post[content]" rows="3", cols="50"><%= @content %></textarea>
+   <p>Make this post public? <input type="checkbox" name="post[is_public]" <%= @checked %>></p>
    <input type="submit">
 </form>

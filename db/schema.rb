@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_11_20_181806) do
 
-  create_table "followers", force: :cascade do |t|
+  create_table "followers", force: :cascade do |t| #! NOT YET IMPLEMENTED
     t.integer "user_id_followed"
     t.integer "user_id_following"
   end
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_181806) do
     t.integer "user_id"
   end
 
-  create_table "postvotes", force: :cascade do |t|
+  create_table "postvotes", force: :cascade do |t| #! NOT YET IMPLEMENTED
     t.integer "post_id"
     t.integer "user_id"
   end
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 2020_11_20_181806) do
     t.string "password_digest"
   end
 
-  create_table "votes", force: :cascade do |t|
+  create_table "votes", force: :cascade do |t| #! NOT YET IMPLEMENTED
     t.integer "score"
   end
 

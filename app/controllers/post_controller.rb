@@ -13,13 +13,16 @@ class PostController < AppController
 
    post '/new' do
       params[:is_public] = params[:is_public] == "on" ? "t" : "f"
-      Post.create(
-         content: params[:content],
-         date_added: Time.new,
-         is_public: params[:is_public],
-         votes: 0,
-         user_id: current_user.id
-      )
+      @user = User.find(session[:id])
+      if !params["post"]["content"].empty?
+         @user.posts << Post.create(
+            content: params["post"]["content"],
+            date_added: Time.new,
+            is_public: params["post"]["is_public"],
+            votes: 0,
+            user_id: current_user.id
+         )
+      end
       redirect "/#{User.find(session[:id]).username}/posts"
    end
 
@@ -36,8 +39,8 @@ class PostController < AppController
 
    post '/:username/posts/edit/:post_id' do
       Post.find(params[:post_id]).update(
-         content: params[:content],
-         is_public: params[:is_public]
+         content: params["post"]["content"],
+         is_public: params["post"]["is_public"]
       )
       redirect "/#{User.find(session[:id]).username}/posts"
    end

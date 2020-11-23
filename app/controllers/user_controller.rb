@@ -32,7 +32,7 @@ class UserController < AppController
 
    get "/:username" do
       @user = User.find_by(username: params[:username])
-      current_user.username == params[:username] ? (erb :"users/home") : (erb :"users/other_user_profile")
+      current_user.username == params[:username] ? (erb :'users/home') : (erb :"users/posts")
    end
 
    post "/logout" do

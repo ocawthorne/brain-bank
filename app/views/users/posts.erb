@@ -1,7 +1,8 @@
-<% posts = Post.all.select{ |post| post.user_id == @user.id }.sort_by{ |post| post.date_added }.reverse! %>
-<% if posts.size > 0 %>
-   <% viewers_own_account = (posts.first.user_id == session[:id]) %>
-   <% posts.each do |post| %>
+<h3><%= params[:username] %></h3>
+<% user_posts = @user.posts.sort_by{ |post| post.date_added }.reverse! %>
+<% if user_posts.size > 0 %>
+   <% viewers_own_account = (user_posts.first.user_id == session[:id]) %>
+   <% user_posts.each do |post| %>
       <% if !post[:is_public] && !viewers_own_account %>
       <% else %>
             <h3><%= post.date_added.strftime("%d %B %Y") %></h3>
@@ -13,5 +14,5 @@
       <% end %>
    <% end %>
 <% else %>
-   <h3>You haven't made any posts yet!</h3>
+   <h3>No posts yet!</h3>
 <% end %>
