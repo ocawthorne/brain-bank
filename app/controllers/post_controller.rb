@@ -26,9 +26,7 @@ class PostController < AppController
       redirect "/#{User.find(session[:id]).username}/posts"
    end
 
-   get '/:username/posts/new' do
-      erb :'users/home'
-   end
+   get('/:username/posts/new') {erb :'users/home'}
 
    get '/:username/posts/edit/:post_id' do
       post = Post.find(params[:post_id])

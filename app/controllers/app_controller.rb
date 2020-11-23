@@ -17,10 +17,6 @@ class AppController < Sinatra::Base
       def logged_in?
          !!current_user
       end
-
-      def public?(post)
-         post[:is_public] == "t" ? true : false
-      end
    end
 
 end
