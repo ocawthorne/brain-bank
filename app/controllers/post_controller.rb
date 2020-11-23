@@ -23,34 +23,28 @@ class PostController < AppController
             user_id: current_user.id
          )
       end
-      redirect "/#{User.find(session[:id]).username}/posts"
+      redirect "/#{@user.username}/posts"
    end
 
    get('/:username/posts/new') {erb :'users/home'}
 
-   get '/:username/posts/edit/:post_id' do
+   get '/:username/posts/:post_id/edit' do
       post = Post.find(params[:post_id])
       @checked = post.is_public ? "checked" : ""
-      if session[:id] == User.find_by(username: params[:username]).id
-         @content = post.content
-         erb :'posts/edit'
+      is_user? ? (@content = post.content ; erb :'posts/edit') : (erb :'sessions/failure')
+   end
+
+   patch '/:username/posts/:post_id/edit' do
+      if posts_user_id_matches_user_found_by_username && is_user?
+         Post.find(params[:post_id]).update(params["post"])
+         params["post"]["content"] == "" ? (redirect "/#{current_user.username}/posts/#{params[:post_id]}/delete") : (redirect "/#{current_user.username}/posts")
       else
          erb :'sessions/failure'
       end
    end
 
-   post '/:username/posts/edit/:post_id' do
-      Post.find(params[:post_id]).update(
-         content: params["post"]["content"],
-         is_public: params["post"]["is_public"]
-      )
-      redirect "/#{User.find(session[:id]).username}/posts"
-   end
-
-   get '/:username/posts/delete/:post_id' do
-      post = Post.find(params[:post_id])
-      user = User.find_by(username: params[:username])
-      if post.user_id == user.id
+   get '/:username/posts/:post_id/delete' do
+      if posts_user_id_matches_user_found_by_username && is_user?
          Post.find(params[:post_id]).delete
          redirect "/#{params[:username]}/posts"
       else

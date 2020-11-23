@@ -7,7 +7,7 @@
       <h3><%= post.date_added.strftime("%d %B %Y") %></h3>
       <p><%= post.content %> <b>(<a href="/<%= author.username %>"><%= author.username %></a>)</b></p>
       <% if viewers_own_post %>
-         <h4><a href="/<%= @user.username %>/posts/edit/<%= post.id %>">(edit)</a> <a href="/<%= @user.username %>/posts/delete/<%= post.id %>">(delete)</a></h4>
+         <h4><a href="/<%= @user.username %>/posts/<%= post.id %>/edit">(edit)</a> <a href="/<%= @user.username %>/posts/<%= post.id %>/delete">(delete)</a></h4>
       <% end %>
       <br>
    <% end %>

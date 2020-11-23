@@ -17,6 +17,14 @@ class AppController < Sinatra::Base
       def logged_in?
          !!current_user
       end
+
+      def posts_user_id_matches_user_found_by_username
+         Post.find(params[:post_id]).user_id == User.find_by(username: params[:username]).id
+      end
+
+      def is_user?
+         session[:id] == User.find_by(username: params[:username]).id
+      end
    end
 
 end
