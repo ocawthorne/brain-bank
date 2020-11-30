@@ -8,9 +8,8 @@ class UserController < AppController
    end
    
    post "/signup" do
-      @username_error, @email_error = false
-      @username_error = true if User.find_by(username: params[:username])
-      @email_error = true if User.find_by(email: params[:email])
+      @username_error = User.find_by(username: params[:username]) ? true : false
+      @email_error = User.find_by(email: params[:email]) ? true : false
       if @username_error || @email_error
          erb :'sessions/signup'
       else
