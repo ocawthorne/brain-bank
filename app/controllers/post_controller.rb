@@ -6,11 +6,13 @@ class PostController < AppController
       erb :'posts/feed'
    end
 
+   #! Read
    get "/:username/posts" do
       @user = User.find_by(username: params[:username])
       erb :'users/posts'
    end
 
+   #! Create
    post '/new' do
       params[:is_public] = params[:is_public] == "on" ? "t" : "f"
       @user = User.find(session[:id])
@@ -28,6 +30,7 @@ class PostController < AppController
 
    get('/:username/posts/new') {erb :'users/home'}
 
+   #! Update
    get '/:username/posts/:post_id/edit' do
       post = Post.find(params[:post_id])
       @checked = post.is_public ? "checked" : ""
@@ -43,6 +46,7 @@ class PostController < AppController
       end
    end
 
+   #! Delete
    get '/:username/posts/:post_id/delete' do
       if posts_user_id_matches_user_found_by_username && is_user?
          Post.find(params[:post_id]).delete
