@@ -1,18 +1,18 @@
 class PostController < AppController
-   get(':username/posts') {erb :'users/posts'}
-
+   #! Read
    get "/feed" do
       @user = User.find(session[:id])
       erb :'posts/feed'
    end
 
-   #! Read
    get "/:username/posts" do
       @user = User.find_by(username: params[:username])
       erb :'users/posts'
    end
 
    #! Create
+   get('/:username/posts/new') {erb :'users/home'}
+
    post '/new' do
       params[:is_public] = params[:is_public] == "on" ? "t" : "f"
       @user = User.find(session[:id])
@@ -27,8 +27,6 @@ class PostController < AppController
       end
       redirect "/#{@user.username}/posts"
    end
-
-   get('/:username/posts/new') {erb :'users/home'}
 
    #! Update
    get '/:username/posts/:post_id/edit' do
